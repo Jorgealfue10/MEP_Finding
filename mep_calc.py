@@ -104,7 +104,7 @@ def steepest_descent_with_attraction(start_coords, end_coords, alpha=0.1, beta=0
     return np.array(path)
 
 # def steepest_descent_momentum(start_coords, step_size=0.1, tol=1e-10, max_steps=1000000, momentum=0.75):
-def steepest_descent_momentum(start_coords, max_steps, step_size=0.1, tol=1e-10, momentum=0.75):
+def steepest_descent_momentum(start_coords, max_steps, step_size=0.2, tol=1e-10, momentum=0.75):
     path = [start_coords]
     coords = np.array(start_coords)
     prev_coords = np.array(start_coords)  # La posición anterior (inicialmente igual a start_coords)
@@ -135,12 +135,14 @@ start1 = np.array([15.,15.,1.40])  # Sustituye con valores reales
 start2 = np.array([2.7,15.,15.5])
 
 # Generar caminos desde ambos extremos
-path1 = steepest_descent(start1)
-path2 = steepest_descent(start2)
+path1 = steepest_descent_momentum(start1,1000000)
+path2 = steepest_descent_momentum(start2,10000000)
+# path1_to2 = steepest_descent_with_attraction(path1[-1], path2[-1])
+# path2_to1 = steepest_descent_with_attraction(path2[-1], path1[-1])
 
 # Invertir uno de los caminos para facilitar la unión
 path2 = path2[::-1]
-path2_to1 = path2_to1[::-1]
+# path2_to1 = path2_to1[::-1]
 
 # Unir caminos cuando la distancia entre sus últimos puntos sea pequeña
 while np.linalg.norm(path1[-1] - path2[0]) < 1e-3:
@@ -148,6 +150,7 @@ while np.linalg.norm(path1[-1] - path2[0]) < 1e-3:
     path1 = np.vstack([path1, mid_point])
     path2 = np.vstack([mid_point, path2])
 
+# final_path = np.vstack([path1, path1_to2, path2_to1, path2])
 final_path = np.vstack([path1, path2])
 
 # Crear un array para almacenar las coordenadas y la energía
@@ -168,12 +171,12 @@ r1, r2, r3, energy = path_with_energy.T
 
 # Graficar la evolución de la energía a lo largo del camino
 plt.figure(figsize=(8, 5))
-plt.plot(r1-r2,energy, marker="o", linestyle="-", color="black", markersize=3, label="r1-r2")
-plt.plot(r2-r1,energy, marker="o", linestyle="-", color="r", markersize=3, label="r2-r1")
+# plt.plot(r1-r2,energy, marker="o", linestyle="-", color="black", markersize=3, label="r1-r2")
+# plt.plot(r2-r1,energy, marker="o", linestyle="-", color="r", markersize=3, label="r2-r1")
 plt.plot(r1-r3,energy, marker="o", linestyle="-", color="g", markersize=3, label="r1-r3")
-plt.plot(r2-r3,energy, marker="o", linestyle="-", color="b", markersize=3, label="r2-r3")
-plt.plot(r3-r1,energy, marker="o", linestyle="-", color="purple", markersize=3, label="r3-r1")
-plt.plot(r3-r2,energy, marker="o", linestyle="-", color="orange", markersize=3, label="r3-r2")
+# plt.plot(r2-r3,energy, marker="o", linestyle="-", color="b", markersize=3, label="r2-r3")
+# plt.plot(r3-r1,energy, marker="o", linestyle="-", color="purple", markersize=3, label="r3-r1")
+# plt.plot(r3-r2,energy, marker="o", linestyle="-", color="orange", markersize=3, label="r3-r2")
 # plt.plot(r1,energy, marker="o", linestyle="-", color="b", markersize=3, label="r1")
 # plt.plot(r2,energy, marker="o", linestyle="-", color="r", markersize=3, label="r2")
 # plt.plot(r3,energy, marker="o", linestyle="-", color="g", markersize=3, label="r3")

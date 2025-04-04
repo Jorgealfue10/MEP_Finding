@@ -38,6 +38,7 @@ class MEP2(ThreeDScene):
     def construct(self):
         self.elapsed_time = 0
 
+        self.camera.background_color = None  # Fondo transparente
         # Leer los datos del archivo MEP
         r_p_h1, r_p_h2, r_h1_h2, energy = np.loadtxt("minimum_energy_path.dat", delimiter=' ', unpack=True)
         num_frames = len(r_p_h1)
@@ -83,7 +84,7 @@ class MEP2(ThreeDScene):
         self.move_camera(
             frame_center=p_pos,
             orientation=normal_vector,
-            distance=20,
+            distance=10,
         )
 
         self.add(atom_p, atom_h1, atom_h2)
@@ -92,7 +93,7 @@ class MEP2(ThreeDScene):
         def update_atoms(mob, dt):
             self.elapsed_time += dt
             # frame = min(int(self.elapsed_time * num_frames / 10), num_frames - 1)
-            frame = 482000+int(self.elapsed_time*100)
+            frame = 242900-int(self.elapsed_time*50)
             # print(frame,r_p_h1[frame], r_p_h2[frame], r_h1_h2[frame])
             _, new_h1_pos, new_h2_pos = get_cartesian_coordinates(r_p_h1[frame], r_p_h2[frame], r_h1_h2[frame])
 
@@ -124,7 +125,11 @@ class MEP2(ThreeDScene):
         atom_h1.add_updater(update_atoms)
         atom_h2.add_updater(update_atoms)
 
-        self.wait(10)
+        self.wait(6)
+
+        atom_h1.clear_updaters()
+        atom_h2.clear_updaters()
+        self.wait(1)
 
         # # Obtener el centro de masas inicial
         # center_of_mass = calculate_center_of_mass(p_pos, h1_pos, h2_pos)
