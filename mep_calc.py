@@ -181,9 +181,9 @@ plt.plot(r1-r3,energy, marker="o", linestyle="-", color="g", markersize=3, label
 # plt.plot(r2,energy, marker="o", linestyle="-", color="r", markersize=3, label="r2")
 # plt.plot(r3,energy, marker="o", linestyle="-", color="g", markersize=3, label="r3")
 
-plt.xlabel("Paso en el camino")
-plt.ylabel("Energía (u.a.)")
-plt.title("Evolución de la Energía en el Camino de Mínima Energía")
+plt.xlabel("Step in the MEP")
+plt.ylabel("Energy (u.a.)")
+plt.title("Energy Evolution along the Minimum Energy Path")
 plt.legend()
 plt.grid()
 # Anotar la diferencia de energía entre el primer y último valores en eV

@@ -93,7 +93,7 @@ class MEP2(ThreeDScene):
         def update_atoms(mob, dt):
             self.elapsed_time += dt
             # frame = min(int(self.elapsed_time * num_frames / 10), num_frames - 1)
-            frame = 242900-int(self.elapsed_time*50)
+            frame = 241000+int(self.elapsed_time*100)
             # print(frame,r_p_h1[frame], r_p_h2[frame], r_h1_h2[frame])
             _, new_h1_pos, new_h2_pos = get_cartesian_coordinates(r_p_h1[frame], r_p_h2[frame], r_h1_h2[frame])
 
