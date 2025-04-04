@@ -135,31 +135,20 @@ start1 = np.array([15.,15.,1.40])  # Sustituye con valores reales
 start2 = np.array([2.7,15.,15.5])
 
 # Generar caminos desde ambos extremos
-# path1 = steepest_descent(start1)
-# path2 = steepest_descent(start2)
-path1 = steepest_descent_momentum(start1,1000000)
-# path1 = steepest_descent_momentum(start1,100)
-path2 = steepest_descent_momentum(start2,10000000)
-# path2 = steepest_descent_momentum(start2,100)
-start1_from1 = path1[-1]
-start2_from2 = path2[-1]
-
-path1_to2 = steepest_descent_with_attraction(start1_from1, start2_from2)
-path2_to1 = steepest_descent_with_attraction(start2_from2, start1_from1)
+path1 = steepest_descent(start1)
+path2 = steepest_descent(start2)
 
 # Invertir uno de los caminos para facilitar la unión
 path2 = path2[::-1]
 path2_to1 = path2_to1[::-1]
 
 # Unir caminos cuando la distancia entre sus últimos puntos sea pequeña
-while np.linalg.norm(path1_to2[-1] - path2_to1[0]) < 1e-3:
-    mid_point = (path1_to2[-1] + path2_to1[0]) / 2
-    path1_to2 = np.vstack([path1_to2, mid_point])
-    path2_to1 = np.vstack([mid_point, path2_to1])
+while np.linalg.norm(path1[-1] - path2[0]) < 1e-3:
+    mid_point = (path1[-1] + path2[0]) / 2
+    path1 = np.vstack([path1, mid_point])
+    path2 = np.vstack([mid_point, path2])
 
-
-final_path = np.vstack([path1, path1_to2, path2_to1, path2])
-# final_path = np.vstack([path1_to2, path2_to1])
+final_path = np.vstack([path1, path2])
 
 # Crear un array para almacenar las coordenadas y la energía
 path_with_energy = []
