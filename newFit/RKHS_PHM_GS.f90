@@ -207,7 +207,7 @@ end subroutine
 !------------------------------------------------------------------------------!
       double precision function v2fast(y,nx,xgr,psum,ider,drv,mq2m)
 !     evaluation de la fonction d'interpolation au point y dans le
-!     cas de la mÅthode RP-RKHS
+!     cas de la mÃthode RP-RKHS
       implicit none
       real(8) xgr, coef, y, drv, psum
       integer i, iz, nx, ider,mq2m
@@ -221,7 +221,7 @@ end subroutine
       v2fast = psum(2,iz) + y*psum(4,iz)
       if (y.gt.0.d0) v2fast = v2fast + (y*psum(1,iz) + psum(3,iz)) / y**(mq2m+2)
 !
-!     calcul de la dÅrivÅe
+!     calcul de la dÃrivÃe
 !
       if (ider.eq.1) then
          drv = psum(4,iz)
