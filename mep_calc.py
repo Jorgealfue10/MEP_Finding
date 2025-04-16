@@ -188,8 +188,7 @@ plt.legend()
 plt.grid()
 # Anotar la diferencia de energía entre el primer y último valores en eV
 delta_E = (energy[-1] - energy[0]) * 27.2114
-plt.annotate(f"$\Delta E$ = {delta_E:.2f} eV", xy=(0.5, 0.95), xycoords="axes fraction",
-             ha="center", va="top", size=12)
+plt.annotate(f"$\Delta E$ = {delta_E:.2f} eV", xy=(0.5, 0.95), xycoords="axes fraction",ha="center", va="top", size=12)
 
 
 plt.show()
