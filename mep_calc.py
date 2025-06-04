@@ -144,7 +144,7 @@ def steepest_descent_with_attraction(start_coords, end_coords, alpha=0.1, beta=0
 ############################################################################################
 
 # def steepest_descent_momentum(start_coords, step_size=0.1, tol=1e-10, max_steps=1000000, momentum=0.75):
-def steepest_descent_momentum(start_coords, max_steps, step_size=0.2, tol=1e-10, momentum=0.75):
+def steepest_descent_momentum(start_coords, max_steps, step_size=0.1, tol=1e-10, momentum=0.75):
     path = [start_coords]
     coords = np.array(start_coords)
     prev_coords = np.array(start_coords)  # La posición anterior (inicialmente igual a start_coords)
@@ -220,8 +220,8 @@ def main():
     print(f"Usando superficie PES tipo: {PES_TYPE}")
 
     # Límites iniciales comunes
-    start1 = np.array([20., 20., 1.40])
-    start2 = np.array([2.7, 20., 20.5])
+    start1 = np.array([12., 12., 1.40])
+    start2 = np.array([2.7, 12., 12.5])
 
     if PES_TYPE == "GS":
         # Caminos desde extremos con descenso
