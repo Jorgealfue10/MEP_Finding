@@ -13,7 +13,7 @@ from PHM1QSm import *
 from H2_diat import *
 import fitGS
 import fit1QSm
-import fitpy8
+import fitpy10
 import SAp10
 import SApp10
 
@@ -261,7 +261,7 @@ def steepest_descent_momentum_theta(start_coords2d, max_steps, tipo, theta_deg,
     return np.array(path)
 
 def smooth_interpolation_on_pes_theta(start_coords2d, end_coords2d, n_steps, tipo, theta_deg,
-                                      energy_threshold=0.2):
+                                    energy_threshold=0.2):
     """Interpolación “theta-aware” en (r12,r23)."""
     start = np.array(start_coords2d, dtype=float)
     end   = np.array(end_coords2d,   dtype=float)
@@ -309,11 +309,11 @@ def main():
         # Para tipos que en tu original usan SD + interpolación:
         if tipo in ["GS", "1SAp"]:
             path1_2d = steepest_descent_momentum_theta(start_in_2d,  max_steps=1_000_000,
-                                                       tipo=tipo, theta_deg=theta)
+                                                    tipo=tipo, theta_deg=theta)
             path2_2d = steepest_descent_momentum_theta(start_out_2d, max_steps=100_000,
-                                                       tipo=tipo, theta_deg=theta)[::-1]
+                                                    tipo=tipo, theta_deg=theta)[::-1]
             path_mid_2d, _ = smooth_interpolation_on_pes_theta(path1_2d[-1], path2_2d[0],
-                                                               100_000, tipo, theta_deg=theta)
+                                                            100_000, tipo, theta_deg=theta)
             final_path_2d = np.vstack([path1_2d, path_mid_2d, path2_2d])
 
         # Para tipos que en tu original usan sólo interpolaciones entre geometrías
