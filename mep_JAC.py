@@ -327,11 +327,11 @@ def main():
     fG3 = lambda X: numerical_gradient_jacobi(X, tipo, m2, m3)
 
     # ejemplos de arranque (ajusta a tu caso)
-    xA = np.array([12.0, 1.40, 0.0])   # R grande, r ~ eq, θ=0
-    xB = np.array([2.7, 12.0, 180.0])  # R pequeño, r grande, θ=180
+    xA = np.array([12.0, 1.40, 90.0])   # R grande, r ~ eq, θ=0
+    xB = np.array([2.7, 20.0, 90.0])  # R pequeño, r grande, θ=180
 
     pathA = steepest_descent_momentum(fG3, xA, 1_000_000)
-    pathB = steepest_descent_momentum(fG3, xB, 100_000)[::-1]
+    pathB = steepest_descent_momentum(fG3, xB, 1_000_000)[::-1]
     bridge3, _ = smooth_interpolation(fE3, pathA[-1], pathB[0], 100_000)
     final3 = np.vstack([pathA, bridge3, pathB])
 
